@@ -1,0 +1,115 @@
+<template>
+    <div id="app">
+        <h2>Ethereum Address Form</h2>
+        <input type="text" v-model="address" placeholder="Enter Ethereum address">
+        <button @click="submitForm">Submit</button>
+        <div v-if="errorMessage" class="error">
+            <p>{{ errorMessage }}</p>
+        </div>
+        <div class="content">
+            <div v-if="response" class="response">
+                <pre>{{ prettyResponse }}</pre>
+            </div>
+            <div class="links">
+                <a v-for="link in links" :href="link.url + address" :key="link.name" target="_blank">{{ link.name }}</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            address: '',
+            response: null,
+            errorMessage: null,
+            links: [
+                { name: 'Etherscan', url: 'https://etherscan.io/address/' },
+                { name: 'Bscscan', url: 'https://bscscan.com/address/' },
+                { name: 'Polygonscan', url: 'https://polygonscan.com/address/' },
+                { name: 'Snowtrace', url: 'https://snowtrace.io/address/' },
+                { name: 'Arbiscan', url: 'https://arbiscan.io/address/' },
+                { name: 'Optimistic Etherscan', url: 'https://optimistic.etherscan.io/address/' },
+                { name: 'Arkham Intelligence', url: 'https://platform.arkhamintelligence.com/explorer/address/' },
+                { name: 'Once Upon', url: 'https://www.onceupon.gg/finder/' },
+                { name: 'Metasleuth', url: 'https://metasleuth.io/result/eth/' }
+            ]
+        }
+    },
+    computed: {
+        prettyResponse() {
+            return JSON.stringify(this.response, null, 2);
+        }
+    },
+    methods: {
+        async submitForm() {
+            try {
+                const res = await axios.get(`http://localhost:8080/v1/arkham/${this.address}`);
+                this.response = res.data;
+                this.errorMessage = null;
+            } catch (err) {
+                console.error(err);
+                this.response = null;
+                if (err.response) {
+                    this.errorMessage = 'Error: ' + err.response.data;
+                } else if (err.request) {
+                    this.errorMessage = 'Error: No response received from server.';
+                } else {
+                    this.errorMessage = 'Error: ' + err.message;
+                }
+            }
+        }
+    }
+}
+</script>
+
+<style>
+body {
+    background-color: #1a1a1a;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #bfbfbf;
+    margin-top: 60px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.error {
+    color: red;
+    margin-top: 20px;
+}
+
+.response {
+    margin-top: 20px;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: #2c2c2c;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.links {
+    margin-top: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.links a {
+    color: #bfbfbf;
+    margin-bottom: 10px;
+}
+</style>
+
