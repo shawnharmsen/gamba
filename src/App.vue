@@ -40,7 +40,8 @@ export default {
                 { name: 'Optimistic Etherscan', url: 'https://optimistic.etherscan.io/address/' },
                 { name: 'Arkham Intelligence', url: 'https://platform.arkhamintelligence.com/explorer/address/' },
                 { name: 'Once Upon', url: 'https://www.onceupon.gg/finder/' },
-                { name: 'Metasleuth', url: 'https://metasleuth.io/result/eth/' }
+                { name: 'Metasleuth', url: 'https://metasleuth.io/result/eth/' },
+                { name: 'ChainEdge', url: 'https://app.chainedge.io/'}
             ]
         }
     },
