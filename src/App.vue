@@ -51,8 +51,12 @@ export default {
     },
     methods: {
         async submitForm() {
+            if (!this.address || this.address.length !== 42 || !this.address.startsWith('0x')) {
+                this.errorMessage = 'Please enter a valid Ethereum address.';
+                return;
+            }
             try {
-                const res = await axios.get(`https://c8eee96cf541.ngrok.app/v1/arkham/${this.address}`);
+                const res = await axios.get(`http://localhost:8080/v1/arkham/${this.address}`);
                 this.response = res.data;
                 this.errorMessage = null;
             } catch (err) {
@@ -84,6 +88,18 @@ body {
     margin-top: 60px;
 }
 
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container input {
+    width: 500px;
+}
+
 .content {
     display: flex;
     justify-content: space-between;
@@ -110,6 +126,10 @@ body {
     display: flex;
     flex-direction: column;
     padding-left: 20px;
+}
+
+.links div {
+    margin-bottom: 10px;
 }
 
 .links a {
