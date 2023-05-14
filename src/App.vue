@@ -47,7 +47,7 @@ export default {
     methods: {
         async submitForm() {
             try {
-                const res = await axios.get(`http://localhost:8080/v1/arkham/${this.address}`);
+                const res = await axios.get(`https://c8eee96cf541.ngrok.app/v1/arkham/${this.address}`);
                 this.response = res.data;
                 this.errorMessage = null;
             } catch (err) {
