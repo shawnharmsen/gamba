@@ -57,7 +57,7 @@ export default {
                 return;
             }
             try {
-                const res = await axios.get(`https://arkham-test.herokuapp.com/${this.address}`);
+                const res = await axios.get(`https://arkham-test.herokuapp.com/arkham/${this.address}`);
                 this.response = res.data;
                 this.errorMessage = null;
             } catch (err) {
