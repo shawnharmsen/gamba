@@ -92,8 +92,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    margin-bottom: 20px;
 }
 
 .form-container input {
