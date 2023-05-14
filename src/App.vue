@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="form-container">
-            <h2>Ethereum Address Form</h2>
+            <h2>Put addy here idiot</h2>
             <input type="text" v-model="address" placeholder="Enter Ethereum address">
             <button @click="submitForm">Submit</button>
         </div>
@@ -96,7 +96,8 @@ body {
 }
 
 .form-container input {
-    width: 500px;
+    width: 600px; /* Increase the width */
+    font-size: 18px; /* Increase the font size */
 }
 
 .content {
