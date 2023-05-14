@@ -1,17 +1,22 @@
 <template>
     <div id="app">
-        <h2>Ethereum Address Form</h2>
-        <input type="text" v-model="address" placeholder="Enter Ethereum address">
-        <button @click="submitForm">Submit</button>
+        <div class="form-container">
+            <h2>Ethereum Address Form</h2>
+            <input type="text" v-model="address" placeholder="Enter Ethereum address">
+            <button @click="submitForm">Submit</button>
+        </div>
         <div v-if="errorMessage" class="error">
             <p>{{ errorMessage }}</p>
         </div>
-        <div class="content">
-            <div v-if="response" class="response">
+        <div class="content" v-if="response">
+            <div class="response">
                 <pre>{{ prettyResponse }}</pre>
             </div>
             <div class="links">
-                <a v-for="link in links" :href="link.url + address" :key="link.name" target="_blank">{{ link.name }}</a>
+                <div v-for="link in links" :key="link.name">
+                    <span>{{ link.name }}: </span>
+                    <a :href="link.url + address" target="_blank">{{ link.url + address }}</a>
+                </div>
             </div>
         </div>
     </div>
